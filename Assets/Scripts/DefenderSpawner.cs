@@ -1,14 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DefenderSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject defenderPrefab;
 
-    private void OnMouseDown() => SpawnDefender();
+    private void OnMouseDown() => SpawnDefender(GetSquareClicked());
 
-    private void SpawnDefender()
+    private Vector2 GetSquareClicked()
     {
-        var newDefender = Instantiate(defenderPrefab, transform.position, Quaternion.identity);
+        var clickPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        var worldPos = Camera.main.ScreenToWorldPoint(clickPos);
+        return worldPos;
+    }
+
+    private void SpawnDefender(Vector2 squarePosition)
+    {
+        var newDefender = Instantiate(defenderPrefab, squarePosition, Quaternion.identity);
     }
 }
