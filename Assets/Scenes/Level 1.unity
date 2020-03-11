@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5baeb6aea53f6d4f845c85825f7588a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defenderPrefab: {fileID: 8282719341640986983, guid: cc87b16f05beddf4d829fafac297e323,
+  defenderPrefab: {fileID: 8932918801993590461, guid: 9e138ba833ad2c94aa329ff1a6b10cab,
     type: 3}
 --- !u!61 &1122502807
 BoxCollider2D:

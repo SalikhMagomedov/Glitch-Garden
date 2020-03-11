@@ -10,11 +10,16 @@ public class DefenderSpawner : MonoBehaviour
     {
         var clickPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         var worldPos = Camera.main.ScreenToWorldPoint(clickPos);
-        return worldPos;
+
+        return SnapToGrid(worldPos);
     }
 
-    private void SpawnDefender(Vector2 squarePosition)
+    private Vector2 SnapToGrid(Vector2 rawWorldPosition) => new Vector2(
+        Mathf.RoundToInt(rawWorldPosition.x),
+        Mathf.RoundToInt(rawWorldPosition.y));
+
+    private void SpawnDefender(Vector2 position)
     {
-        var newDefender = Instantiate(defenderPrefab, squarePosition, Quaternion.identity);
+        var newDefender = Instantiate(defenderPrefab, position, Quaternion.identity);
     }
 }
