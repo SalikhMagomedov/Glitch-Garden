@@ -2,7 +2,7 @@
 
 public class DefenderSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject defenderPrefab;
+    private Defender defenderPrefab;
 
     private void OnMouseDown() => SpawnDefender(GetSquareClicked());
 
@@ -13,6 +13,8 @@ public class DefenderSpawner : MonoBehaviour
 
         return SnapToGrid(worldPos);
     }
+
+    public Defender SelectedDefender { set => defenderPrefab = value; }
 
     private Vector2 SnapToGrid(Vector2 rawWorldPosition) => new Vector2(
         Mathf.RoundToInt(rawWorldPosition.x),

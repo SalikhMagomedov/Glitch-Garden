@@ -2,9 +2,16 @@
 
 public class DefenderButton : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Defender defenderPrefab;
 
-    private void Awake() => spriteRenderer = GetComponent<SpriteRenderer>();
+    private SpriteRenderer spriteRenderer;
+    private DefenderSpawner defenderSpawner;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defenderSpawner = FindObjectOfType<DefenderSpawner>();
+    }
 
     private void OnMouseDown()
     {
@@ -14,5 +21,6 @@ public class DefenderButton : MonoBehaviour
             button.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 255);
         }
         spriteRenderer.color = Color.white;
+        defenderSpawner.SelectedDefender = defenderPrefab;
     }
 }
