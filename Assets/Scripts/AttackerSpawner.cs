@@ -13,10 +13,14 @@ public class AttackerSpawner : MonoBehaviour
     {
         while (spawn)
         {
-            yield return new WaitForSeconds(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
+            yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
             Spawn();
         }
     }
 
-    private void Spawn() => Instantiate(attacker, transform.position, Quaternion.identity);
+    private void Spawn()
+    {
+        var newAttacker = Instantiate(attacker, transform.position, Quaternion.identity);
+        newAttacker.transform.parent = transform;
+    }
 }
