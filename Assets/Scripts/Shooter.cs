@@ -4,5 +4,5 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab, gun;
 
-    public void Fire(float damage) => Instantiate(projectilePrefab, gun.transform.position, Quaternion.identity);
+    public void Fire() => Instantiate(projectilePrefab, gun.transform.position, Quaternion.identity);
 }
