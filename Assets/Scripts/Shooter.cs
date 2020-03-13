@@ -5,20 +5,15 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab, gun;
     
     private AttackerSpawner myLaneSpawner;
+    private Animator animator;
 
-    private void Awake() => SetLaneSpawner();
-
-    private void Update()
+    private void Awake()
     {
-        if (IsAttackerInLane())
-        {
-            Debug.Log("shoot pew pew");
-        }
-        else
-        {
-            Debug.Log("sit and wait");
-        }
+        SetLaneSpawner();
+        animator = GetComponent<Animator>();
     }
+
+    private void Update() => animator.SetBool("isAttacking", IsAttackerInLine());
 
     private void SetLaneSpawner()
     {
@@ -35,7 +30,7 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    private bool IsAttackerInLane() => !(myLaneSpawner.transform.childCount <= 0);
+    private bool IsAttackerInLine() => !(myLaneSpawner.transform.childCount <= 0);
 
     public void Fire() => Instantiate(projectilePrefab, gun.transform.position, Quaternion.identity);
 }
