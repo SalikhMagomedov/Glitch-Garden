@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AttackerSpawner : MonoBehaviour
 {
-    [SerializeField] private Attacker attacker;
+    [SerializeField] private Attacker[] attackers;
     [SerializeField] private float minSpawnDelay = 1f;
     [SerializeField] private float maxSpawnDelay = 5f;
 
@@ -14,11 +14,13 @@ public class AttackerSpawner : MonoBehaviour
         while (spawn)
         {
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
-            Spawn();
+            SpawnAttacker();
         }
     }
 
-    private void Spawn()
+    private void SpawnAttacker() => Spawn(attackers[Random.Range(0, attackers.Length)]);
+
+    private void Spawn(Attacker attacker)
     {
         var newAttacker = Instantiate(attacker, transform.position, Quaternion.identity);
         newAttacker.transform.parent = transform;
