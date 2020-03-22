@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Attacker : MonoBehaviour
 {  
@@ -7,7 +6,17 @@ public class Attacker : MonoBehaviour
     private GameObject currentTarget;
     private Animator animator;
 
-    private void Awake() => animator = GetComponent<Animator>();
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+
+        FindObjectOfType<LevelController>().AttackerSpawned();
+    }
+
+    private void OnDestroy()
+    {
+        FindObjectOfType<LevelController>().AttackerKilled();
+    }
 
     private void Update()
     {

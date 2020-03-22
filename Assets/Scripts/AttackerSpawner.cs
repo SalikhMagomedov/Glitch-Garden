@@ -18,6 +18,8 @@ public class AttackerSpawner : MonoBehaviour
         }
     }
 
+    public void StopSpawing() => spawn = false;
+
     private void SpawnAttacker() => Spawn(attackers[Random.Range(0, attackers.Length)]);
 
     private void Spawn(Attacker attacker)

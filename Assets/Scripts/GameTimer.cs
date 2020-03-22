@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
@@ -9,6 +7,7 @@ public class GameTimer : MonoBehaviour
     [SerializeField] private float levelTime = 10f;
 
     private Slider slider;
+    private bool triggerLevelFinished = false;
 
     private void Awake()
     {
@@ -17,12 +16,15 @@ public class GameTimer : MonoBehaviour
 
     private void Update()
     {
+        if (triggerLevelFinished) { return; }
+
         slider.value = Time.timeSinceLevelLoad / levelTime;
 
         bool timerFinished = Time.timeSinceLevelLoad >= levelTime;
         if (timerFinished)
         {
-            Debug.Log("level timer expired!");
+            FindObjectOfType<LevelController>().LevelTimerFinished();
+            triggerLevelFinished = true;
         }
     }
 }
