@@ -4,12 +4,17 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private GameObject winLabel;
+    [SerializeField] private GameObject loseLabel;
     [SerializeField] private float waitToLoad = 4f;
 
     private int numberOfAttackers = 0;
     private bool levelTimerFinished = false;
 
-    private void Start() => winLabel.SetActive(false);
+    private void Start()
+    {
+        winLabel.SetActive(false);
+        loseLabel.SetActive(false);
+    }
 
     public void AttackerSpawned() => numberOfAttackers++;
 
@@ -20,6 +25,12 @@ public class LevelController : MonoBehaviour
         {
             StartCoroutine(HandleWinCondition());
         }
+    }
+
+    public void HandleLoseCondition()
+    {
+        loseLabel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     private IEnumerator HandleWinCondition()
