@@ -4,7 +4,9 @@ using UnityEngine.UI;
 public class OptionsController : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider difficultySlider;
     [SerializeField] private float defaultVolume = .8f;
+    [SerializeField] private float defaultDifficulty = 0f;
 
     private MusicPlayer musicPlayer;
 
@@ -16,6 +18,7 @@ public class OptionsController : MonoBehaviour
     private void Start()
     {
         volumeSlider.value = PlayerPrefsController.MasterVolume;
+        difficultySlider.value = PlayerPrefsController.Difficulty;
     }
 
     private void Update()
@@ -33,11 +36,13 @@ public class OptionsController : MonoBehaviour
     public void SaveAndExit()
     {
         PlayerPrefsController.MasterVolume = volumeSlider.value;
+        PlayerPrefsController.Difficulty = difficultySlider.value;
         FindObjectOfType<LevelLoader>().LoadMainMenu();
     }
 
     public void SetDefaults()
     {
         volumeSlider.value = defaultVolume;
+        difficultySlider.value = defaultDifficulty;
     }
 }

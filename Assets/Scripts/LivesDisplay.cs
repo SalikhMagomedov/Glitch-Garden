@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class LivesDisplay : MonoBehaviour
 {
-    [SerializeField] private int lives = 5;
+    [SerializeField] float baseLives = 3;
 
-    TMPro.TextMeshProUGUI livesText;
+    private float lives;
+    private TextMeshProUGUI livesText;
 
     private void Start()
     {
-        livesText = GetComponent<TMPro.TextMeshProUGUI>();
+        lives = baseLives - PlayerPrefsController.Difficulty;
+        livesText = GetComponent<TextMeshProUGUI>();
         UpdateDisplay();
     }
 
