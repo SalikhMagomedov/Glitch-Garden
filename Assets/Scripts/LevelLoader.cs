@@ -35,4 +35,6 @@ public class LevelLoader : MonoBehaviour
     }
 
     public void QuitGame() => Application.Quit();
+
+    public void LoadOptionsScreen() => SceneManager.LoadScene("Options Screen");
 }
