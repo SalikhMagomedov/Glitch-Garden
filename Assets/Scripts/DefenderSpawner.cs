@@ -1,8 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DefenderSpawner : MonoBehaviour
 {
     private Defender defenderPrefab;
+    private GameObject defenderParent;
+
+    private const string DEFENDER_PARENT_NAME = "Defenders";
+
+    private void Awake()
+    {
+        CreateDefenderParent();
+    }
+
+    private void CreateDefenderParent()
+    {
+        defenderParent = GameObject.Find(DEFENDER_PARENT_NAME);
+        if (!defenderParent)
+        {
+            defenderParent = new GameObject(DEFENDER_PARENT_NAME);
+        }
+    }
 
     private void OnMouseDown() => AttemptToPlaceDefenderAt(GetSquareClicked());
 
@@ -23,6 +41,7 @@ public class DefenderSpawner : MonoBehaviour
     private void SpawnDefender(Vector2 position)
     {
         var newDefender = Instantiate(defenderPrefab, position, Quaternion.identity);
+        newDefender.transform.parent = defenderParent.transform;
     }
 
     private void AttemptToPlaceDefenderAt(Vector2 gridPos)

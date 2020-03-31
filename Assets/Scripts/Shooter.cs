@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
@@ -6,11 +7,24 @@ public class Shooter : MonoBehaviour
     
     private AttackerSpawner myLaneSpawner;
     private Animator animator;
+    private GameObject projectileParent;
+
+    private const string PROJECTILE_PARENT_NAME = "Projectiles";
 
     private void Awake()
     {
         SetLaneSpawner();
         animator = GetComponent<Animator>();
+        CreateProjectileParent();
+    }
+
+    private void CreateProjectileParent()
+    {
+        projectileParent = GameObject.Find(PROJECTILE_PARENT_NAME);
+        if (!projectileParent)
+        {
+            projectileParent = new GameObject(PROJECTILE_PARENT_NAME);
+        }
     }
 
     private void Update() => animator.SetBool("isAttacking", IsAttackerInLine());
@@ -32,5 +46,9 @@ public class Shooter : MonoBehaviour
 
     private bool IsAttackerInLine() => !(myLaneSpawner.transform.childCount <= 0);
 
-    public void Fire() => Instantiate(projectilePrefab, gun.transform.position, Quaternion.identity);
+    public void Fire()
+    {
+        var newProjectile = Instantiate(projectilePrefab, gun.transform.position, Quaternion.identity);
+        newProjectile.transform.parent = projectileParent.transform;
+    }
 }
