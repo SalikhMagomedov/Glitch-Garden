@@ -20,7 +20,7 @@ public class DefenderButton : MonoBehaviour
         var costText = GetComponentInChildren<TMPro.TextMeshProUGUI>();
         if (!costText)
         {
-            Debug.LogError($"{name} has no cost text, add some!");
+            //Debug.LogError($"{name} has no cost text, add some!");
         }
         else
         {
