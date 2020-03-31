@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DefenderButton : MonoBehaviour
 {
@@ -11,6 +12,20 @@ public class DefenderButton : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         defenderSpawner = FindObjectOfType<DefenderSpawner>();
+        LabelButtonWithCost();
+    }
+
+    private void LabelButtonWithCost()
+    {
+        var costText = GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        if (!costText)
+        {
+            Debug.LogError($"{name} has no cost text, add some!");
+        }
+        else
+        {
+            costText.text = defenderPrefab.StarCost.ToString();
+        }
     }
 
     private void OnMouseDown()
